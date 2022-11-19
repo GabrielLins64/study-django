@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  postgres:
+    build:
+      context: ./db
+    container_name: database-django-tutorial
+    environment:
+      POSTGRES_DB: django_tutorial_db
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: docker
+    ports:
+      - "5432:5432"
+    networks:
+      django_tutorial_network:
+        ipv4_address: 10.5.0.4
+
+  django-web-server:
+    build: ./server
+    container_name: server-django-tutorial
+    ports:
+      - "8080:8000"
+    depends_on:
+      - postgres
+    volumes:
+      - ./server:/code
+    networks:
+      django_tutorial_network:
+        ipv4_address: 10.5.0.5
+
+networks:
+  django_tutorial_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
+          gateway: 10.5.0.1
