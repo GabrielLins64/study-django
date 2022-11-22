@@ -13,7 +13,7 @@ services:
       - "5432:5432"
     networks:
       django_tutorial_network:
-        ipv4_address: 10.5.0.4
+        ipv4_address: 10.6.0.4
 
   django-web-server:
     build: ./server
@@ -26,12 +26,12 @@ services:
       - ./server:/code
     networks:
       django_tutorial_network:
-        ipv4_address: 10.5.0.5
+        ipv4_address: 10.6.0.5
 
 networks:
   django_tutorial_network:
     driver: bridge
     ipam:
       config:
-        - subnet: 10.5.0.0/16
-          gateway: 10.5.0.1
+        - subnet: 10.6.0.0/16
+          gateway: 10.6.0.1

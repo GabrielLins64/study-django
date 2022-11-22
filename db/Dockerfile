@@ -1,8 +1,8 @@
 FROM postgres:14.4
 
 # Environment variables
-ENV PGUSER=docker
-ENV PGPASSWORD=docker
+ENV PGUSER=djuser
+ENV PGPASSWORD=djuser
 ENV PGDATABASE=django_tutorial_db
 ENV PGPORT=5432
 ENV TZ='America/Sao_Paulo'
