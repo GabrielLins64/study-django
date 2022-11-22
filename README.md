@@ -13,7 +13,7 @@ Repository for study on Django Framework
 
 ## Save point
 
-https://docs.djangoproject.com/en/4.1/intro/tutorial03/
+https://docs.djangoproject.com/en/4.1/intro/tutorial04/#use-generic-views-less-code-is-better
 
 ## References
 
