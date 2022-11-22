@@ -20,7 +20,7 @@
   </fieldset>
   <input type="submit" value="vote">
 </form>
-<form action="{% url 'polls:index' %}" method="post">
+<form action="{% url 'polls:index' %}" method="get">
   {% csrf_token %}
   <input type="submit" value="Back">
 </form>
