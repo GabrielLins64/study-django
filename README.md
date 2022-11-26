@@ -13,7 +13,7 @@ Repository for study on Django Framework
 
 ## Save point
 
-https://docs.djangoproject.com/en/4.1/intro/tutorial06/
+https://docs.djangoproject.com/en/4.1/intro/reusable-apps/
 
 ## References
 
