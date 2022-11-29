@@ -36,7 +36,7 @@ class SnippetViewSet(viewsets.ModelViewSet):
 
 @api_view(['GET', 'POST'])
 @permission_classes((permissions.AllowAny,))
-def snippet_list(request):
+def snippet_list(request, format=None):
     """
     List all code snippets, or create a new snippet.
     """
@@ -55,7 +55,7 @@ def snippet_list(request):
 
 @api_view(['GET', 'PUT', 'DELETE'])
 @permission_classes((permissions.AllowAny,))
-def snippet_detail(request, pk):
+def snippet_detail(request, pk, format=None):
     """
     Retrieve, update or delete a code snippet.
     """
