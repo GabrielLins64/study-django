@@ -86,7 +86,7 @@ https://docs.djangoproject.com/en/4.1/intro/reusable-apps/
 
 ### Django REST Framework
 
-https://www.django-rest-framework.org/tutorial/4-authentication-and-permissions/
+https://www.django-rest-framework.org/tutorial/5-relationships-and-hyperlinked-apis/
 
 ## References
 
