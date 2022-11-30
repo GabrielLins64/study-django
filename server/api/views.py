@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from api.models import Snippet
 from api.serializers import UserSerializer, GroupSerializer, SnippetSerializer
+from api.permissions import IsOwnerOrReadOnly
 
 
 class UserList(generics.ListAPIView):
@@ -41,7 +42,10 @@ class SnippetDetail(APIView):
     """
     Retrieve, update or delete a snippet instance.
     """
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [
+        permissions.IsAuthenticatedOrReadOnly,
+        IsOwnerOrReadOnly
+    ]
 
     def get_object(self, pk):
         try:
