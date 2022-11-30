@@ -1,45 +1,30 @@
 from django.contrib.auth.models import User, Group
 from django.http import HttpResponse, JsonResponse, Http404
-from rest_framework import viewsets, permissions, status
+from rest_framework import viewsets, permissions, status, generics
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from api.models import Snippet
 from api.serializers import UserSerializer, GroupSerializer, SnippetSerializer
+from api.permissions import IsOwnerOrReadOnly
 
 
-class UserViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
-    queryset = User.objects.all().order_by('-date_joined')
+class UserList(generics.ListAPIView):
+    queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticated]
 
 
-class GroupViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
-    queryset = Group.objects.all()
-    serializer_class = GroupSerializer
-    permission_classes = [permissions.IsAuthenticated]
+class UserDetail(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 
-class SnippetViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows snippets to be viewed or edited.
-    """
-    queryset = Snippet.objects.all()
-    serializer_class = SnippetSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-
-@permission_classes((permissions.AllowAny,))
 class SnippetList(APIView):
     """
     List all code snippets, or create a new snippet.
     """
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
     def get(self, request, format=None):
         snippets = Snippet.objects.all()
         serializer = SnippetSerializer(snippets, many=True)
@@ -48,16 +33,20 @@ class SnippetList(APIView):
     def post(self, request, format=None):
         serializer = SnippetSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            serializer.save(owner=self.request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@permission_classes((permissions.AllowAny,))
 class SnippetDetail(APIView):
     """
     Retrieve, update or delete a snippet instance.
     """
+    permission_classes = [
+        permissions.IsAuthenticatedOrReadOnly,
+        IsOwnerOrReadOnly
+    ]
+
     def get_object(self, pk):
         try:
             return Snippet.objects.get(pk=pk)
