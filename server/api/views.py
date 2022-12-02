@@ -4,6 +4,7 @@ from rest_framework import viewsets, permissions, status, generics, renderers
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.pagination import PageNumberPagination
 from api.models import Snippet
 from api.serializers import UserSerializer, GroupSerializer, SnippetSerializer
 from api.permissions import IsOwnerOrReadOnly
@@ -39,7 +40,7 @@ class UserDetail(generics.RetrieveAPIView):
     serializer_class = UserSerializer
 
 
-class SnippetList(APIView):
+class SnippetList(APIView, PageNumberPagination):
     """
     List all code snippets, or create a new snippet.
     """
@@ -47,13 +48,14 @@ class SnippetList(APIView):
 
     def get(self, request, format=None):
         snippets = Snippet.objects.all()
+        result = self.paginate_queryset(snippets, request, view=self)
         serializer_context = {'request': request}
         serializer = SnippetSerializer(
-            snippets,
+            result,
             many=True,
             context=serializer_context
         )
-        return Response(serializer.data)
+        return self.get_paginated_response(serializer.data)
 
     def post(self, request, format=None):
         serializer_context = {'request': request}
