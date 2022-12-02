@@ -56,7 +56,8 @@ class SnippetList(APIView):
         return Response(serializer.data)
 
     def post(self, request, format=None):
-        serializer = SnippetSerializer(data=request.data)
+        serializer_context = {'request': request}
+        serializer = SnippetSerializer(data=request.data, context=serializer_context)
         if serializer.is_valid():
             serializer.save(owner=self.request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -86,7 +87,10 @@ class SnippetDetail(APIView):
 
     def put(self, request, pk, format=None):
         snippet = self.get_object(pk)
-        serializer = SnippetSerializer(snippet, data=request.data)
+        serializer_context = {'request': request}
+        serializer = SnippetSerializer(snippet,
+                                       data=request.data,
+                                       context=serializer_context)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
