@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  db:
+    build:
+      context: ./database
+    container_name: ds_study
+    environment:
+      POSTGRES_DB: django_study_db
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: docker
+    ports:
+      - "5432:5432"
+    networks:
+      ds_network:
+        ipv4_address: 10.8.0.4
+  
+  web:
+    build: .
+    container_name: ds_backend
+    volumes:
+      - .:/code
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    networks:
+      ds_network:
+        ipv4_address: 10.8.0.5
+    command: python manage.py runserver 0.0.0.0:8000
+
+networks:
+  ds_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.8.0.0/16
+          gateway: 10.8.0.1
