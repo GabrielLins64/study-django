@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Poll Question</title>
+  </head>
+  <body>
+    <h3>Poll Question</h3>
+
+    <div>
+      <b>Number:</b> {{question.id}}<br />
+      <b>Text:</b> {{question}}<br />
+      <b>Publication Date:</b> {{question.pub_date}}<br />
+      <b>Choices:</b>
+      {% if question.choice_set.exists %}
+      <ul>
+        {% for choice in question.choice_set.all %}
+        <li>{{choice}}</li>
+        {% endfor %}
+      </ul>
+      {% else %}
+        <span>There are no choices for this question.</span><br /><br />
+      {% endif %}
+    </div>
+
+    <button onclick="goBack()">Back</button>
+  </body>
+  <script>
+    const goBack = () => {
+      window.history.back();
+    };
+  </script>
+</html>
