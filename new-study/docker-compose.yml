@@ -4,7 +4,7 @@ services:
   db:
     build:
       context: ./database
-    container_name: ds_study
+    container_name: ds_database
     environment:
       POSTGRES_DB: django_study_db
       POSTGRES_USER: docker
