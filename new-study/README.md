@@ -8,21 +8,30 @@ to recall concepts and practice.
 <h2>Index</h2>
 
 - [Dependencies](#dependencies)
-- [Building the container](#building-the-container)
-- [Django Concepts](#django-concepts)
+- [Installation and executing](#installation-and-executing)
+- [Checkpoint](#checkpoint)
 
 ---
 
 ## Dependencies
 
-- Docker
+- [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/)
+- [Django](https://www.djangoproject.com/) (Only inside the container)
+- [PostgreSQL](https://www.postgresql.org/) (Only inside the container)
 
-## Building the container
+## Installation and executing
 
+1. Install Docker and Docker Compose
+2. Open a shell inside this root directory
+3. Execute docker compose:
 
+```shell
+docker compose up -d
+```
 
-## Django Concepts
+4. Open your browser at http://localhost:8000/
 
+## Checkpoint
 
-
-
+[Django Docs - Views](https://docs.djangoproject.com/en/4.1/intro/tutorial04/)
