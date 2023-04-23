@@ -87,6 +87,10 @@ DATABASES = {
 }
 
 
+# Coloured tests outputs
+TEST_RUNNER = "redgreenunittest.django.runner.RedGreenDiscoverRunner"
+
+
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
