@@ -6,5 +6,5 @@ until python /code/manage.py makemigrations; do
 done
 
 python /code/manage.py migrate && \
-sh /code/init/load_mocks.sh && \
+# sh /code/init/load_mocks.sh && \
 python /code/manage.py runserver 0.0.0.0:8000
