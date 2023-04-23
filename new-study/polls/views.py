@@ -2,23 +2,34 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.db.models import F
+from django.views import generic
 from polls.models import Question, Choice
 
 
-def index(request):
-    latest_question_list = Question.objects.order_by('-pub_date')[:5]
-    context = {'latest_question_list': latest_question_list}
-    return render(request, 'polls/index.html', context)
+class IndexView(generic.ListView):
+    """The generic ListView uses by default the template
+    name "<app_name>/<model_name>_list.html". Also, the
+    default context name is <model>_list."""
+    # template_name = 'polls/index.html' # overrides "polls/question_list.html"
+    # context_object_name = 'latest_question_list' # overrides "question_list" default ctx name
+    # model = Question # Not required, since get_queryset returns Question model
+
+    def get_queryset(self):
+        """Return the last five published questions."""
+        return Question.objects.order_by('-pub_date')[:5]
 
 
-def detail(request, question_id):
-    question = get_object_or_404(Question, pk=question_id)
-    return render(request, 'polls/detail.html', {'question': question})
+class DetailView(generic.DetailView):
+    """The generic DetailView uses by default the template
+    name "<app_name>/<model_name>_detail.html". Also, the
+    default context name is <model>."""
+    model = Question
+    # template_name = 'polls/detail.html' 
 
 
-def results(request, question_id):
-    question = get_object_or_404(Question, pk=question_id)
-    return render(request, 'polls/results.html', {'question': question})
+class ResultsView(generic.DetailView):
+    model = Question
+    template_name = 'polls/results.html' # overrides "<app_name>/<model_name>_detail.html"
 
 
 def vote(request, question_id):
