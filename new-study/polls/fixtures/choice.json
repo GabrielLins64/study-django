@@ -1,0 +1,74 @@
+[
+  {
+    "model": "polls.Choice",
+    "pk": 1,
+    "fields": {
+      "question": 1,
+      "choice_text": "Doing well",
+      "votes": 0
+    }
+  },
+  {
+    "model": "polls.Choice",
+    "pk": 2,
+    "fields": {
+      "question": 1,
+      "choice_text": "Not much",
+      "votes": 0
+    }
+  },
+  {
+    "model": "polls.Choice",
+    "pk": 3,
+    "fields": {
+      "question": 2,
+      "choice_text": "I am a student",
+      "votes": 0
+    }
+  },
+  {
+    "model": "polls.Choice",
+    "pk": 4,
+    "fields": {
+      "question": 2,
+      "choice_text": "I am a teacher",
+      "votes": 0
+    }
+  },
+  {
+    "model": "polls.Choice",
+    "pk": 5,
+    "fields": {
+      "question": 2,
+      "choice_text": "I am a doctor",
+      "votes": 0
+    }
+  },
+  {
+    "model": "polls.Choice",
+    "pk": 6,
+    "fields": {
+      "question": 3,
+      "choice_text": "Less than 20",
+      "votes": 0
+    }
+  },
+  {
+    "model": "polls.Choice",
+    "pk": 7,
+    "fields": {
+      "question": 3,
+      "choice_text": "Between 20 and 40",
+      "votes": 0
+    }
+  },
+  {
+    "model": "polls.Choice",
+    "pk": 8,
+    "fields": {
+      "question": 3,
+      "choice_text": "Over 40",
+      "votes": 0
+    }
+  }
+]
