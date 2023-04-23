@@ -29,7 +29,7 @@ services:
     networks:
       ds_network:
         ipv4_address: 10.8.0.5
-    command: python manage.py runserver 0.0.0.0:8000
+    # command: python manage.py runserver 0.0.0.0:8000
 
 networks:
   ds_network:
