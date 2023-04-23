@@ -1,0 +1,26 @@
+[
+  {
+    "model": "polls.Question",
+    "pk": 1,
+    "fields": {
+      "question_text": "What's up?",
+      "pub_date": "2023-04-15T14:30:00Z"
+    }
+  },
+  {
+    "model": "polls.Question",
+    "pk": 2,
+    "fields": {
+      "question_text": "Who are you?",
+      "pub_date": "2023-04-20T16:30:00Z"
+    }
+  },
+  {
+    "model": "polls.Question",
+    "pk": 3,
+    "fields": {
+      "question_text": "How old are you?",
+      "pub_date": "2099-12-20T15:30:00Z"
+    }
+  }
+]
