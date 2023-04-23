@@ -34,4 +34,4 @@ docker compose up -d
 
 ## Checkpoint
 
-[Django Docs - Views](https://docs.djangoproject.com/en/4.1/intro/tutorial04/#use-generic-views-less-code-is-better)
+[Django Docs - Testing](https://docs.djangoproject.com/en/4.1/intro/tutorial05/)
